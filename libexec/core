@@ -248,6 +248,9 @@ __remote() {
 
   for _host in $_hosts
   do
+    if [ "$(echo $_host|grep -o "@")" != "@" ]; then
+      _host="$APP_USER@$_host"
+    fi
     ssh -o ConnectTimeout="$SSH_TIMEOUT" "$_host" "$_remote_job $SILENCE" &
     background_jobs_pids+=("$!")
     local _background_job="ssh -o ConnectTimeout=$SSH_TIMEOUT $_host $_remote_job $SILENCE"
