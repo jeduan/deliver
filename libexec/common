@@ -191,7 +191,7 @@ npm_install() {
     set -e
     source ~/.profile
     cd $DELIVER_TO $SILENCE
-    npm install $SILENCE
+    npm install --production $SILENCE
   "
 
   __exec_if_defined "post_npm_install"
