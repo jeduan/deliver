@@ -10,6 +10,16 @@ then
   SUPERVISOR="upstart"
 fi
 
+post_npm_install() {
+  status "Installing bower components"
+  __remote "
+    set -e
+    source ~/.profile
+    cd $DELIVER_TO $SILENCE
+    bower install --production $SILENCE
+  "
+}
+
 run() {
   authorize_hosts
   init_app_remotely
